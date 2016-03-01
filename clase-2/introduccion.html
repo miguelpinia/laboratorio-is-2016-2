@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Introducción a HTML y CSS</title>
+<meta name="author" content="(Miguel Piña)"/>
+
+<link rel="stylesheet" href="file:///home/miguel/reveal.js/js/reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="file:///home/miguel/reveal.js/js/reveal.js/css/theme/moon.css" id="theme"/>
+<link rel="stylesheet" href="/home/miguel/reveal.js/local.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/miguel/reveal.js/js/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<meta name="description" content="Org-Reveal Introduction.">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Introducción a HTML y CSS</h1>
+<h2>Miguel Piña</h2>
+<h2><a href="mailto:miguel_pinia@ciencias.unam.mx">miguel_pinia@ciencias.unam.mx</a></h2>
+<h2><span class="timestamp-wrapper"><span class="timestamp">[2016-02-16 mar 10:22]</span></span></h2>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-orgheadline1">¿Qué es HTML?</a></li>
+<li><a href="#/slide-orgheadline2">Estructura de un documento HTML</a></li>
+<li><a href="#/slide-orgheadline3">Etiquetas básicas</a></li>
+<li><a href="#/slide-orgheadline4">Etiquetas básicas</a></li>
+<li><a href="#/slide-orgheadline5">Etiquetas básicas</a></li>
+<li><a href="#/slide-orgheadline6">Etiquetas básicas</a></li>
+<li><a href="#/slide-orgheadline7">Etiquetas básicas</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+
+<section>
+<section id="slide-orgheadline1">
+<h2 id="orgheadline1">¿Qué es HTML?</h2>
+<ul>
+<li>HTML siglas de HyperText Markup Language («lenguaje de marcas de hipertexto»).</li>
+<li>Sirve para la elaboración de páginas web.</li>
+<li>Es un estándar para la escritura de páginas web.</li>
+<li>Está a cargo de la W3C.</li>
+<li>El procesamiento de las páginas web recae en los navegadores.</li>
+<li>La estandarización permite que sea interpretada por cualquier navegador web.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline2">
+<h2 id="orgheadline2">Estructura de un documento HTML</h2>
+<ul>
+<li>Ejemplo</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre><code class="html"><!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Ejemplo1</title>
+  </head>
+  <body>
+    <p>Párrafo de ejemplo</p>
+  </body>
+</html>
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline3">
+<h2 id="orgheadline3">Etiquetas básicas</h2>
+<ul>
+<li>&lt;html&gt;: define el inicio del documento HTML, le indica al navegador que lo que
+viene a continuación debe ser interpretado como código HTML. Esto es así de
+facto, ya que en teoría lo que define el tipo de documento es el DOCTYPE, que
+significa la palabra justo tras DOCTYPE el tag de raíz.</li>
+
+<li>&lt;script&gt;: incrusta un script en una web, o llama a uno mediante src="url del
+script". Se recomienda incluir el tipo MIME en el atributo type, en el caso de
+JavaScript text/javascript.</li>
+
+<li>&lt;head&gt;: define la cabecera del documento HTML; esta cabecera suele contener
+información sobre el documento que no se muestra directamente al usuario como,
+por ejemplo, el título de la ventana del navegador.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline4">
+<h2 id="orgheadline4">Etiquetas básicas</h2>
+<ul>
+<li>&lt;title&gt;: define el título de la página. Por lo general, el título aparece en la
+barra de título encima de la ventana.</li>
+
+<li>&lt;link&gt;: para vincular el sitio a hojas de estilo o iconos. Por ejemplo:
+&lt;link rel="stylesheet" href="/style.css" type="text/css"&gt;.</li>
+
+<li>&lt;style&gt;: para colocar el estilo interno de la página; ya sea usando CSS u otros
+lenguajes similares. No es necesario colocarlo si se va a vincular a un archivo
+externo usando la etiqueta &lt;link&gt;.</li>
+
+<li>&lt;meta&gt;: para metadatos como la autoría o la licencia, incluso para indicar
+parámetros http (mediante http-equiv="") cuando no se pueden modificar por no
+estar disponible la configuración o por dificultades con server-side scripting.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline5">
+<h2 id="orgheadline5">Etiquetas básicas</h2>
+<ul>
+<li>&lt;body&gt;: define el contenido principal o cuerpo del documento. Esta es la parte
+del documento html que se muestra en el navegador; dentro de esta etiqueta
+pueden definirse propiedades comunes a toda la página, como color de fondo y
+márgenes. Dentro del cuerpo &lt;body&gt; es posible encontrar numerosas etiquetas. A
+continuación se indican algunas a modo de ejemplo:</li>
+
+<li>&lt;h1&gt; a &lt;h6&gt;: encabezados o títulos del documento con diferente relevancia.</li>
+
+<li>&lt;table&gt;: define una tabla.</li>
+
+<li>&lt;tr&gt;: fila de una tabla.</li>
+
+<li>&lt;td&gt;: celda de una tabla (debe estar dentro de una fila).</li>
+
+<li>&lt;a&gt;: hipervínculo o enlace, dentro o fuera del sitio web. Debe definirse el
+parámetro de pasada por medio del atributo href. Por ejemplo: &lt;a
+href="<a href="http://www.example.com/">http://www.example.com/</a>" title="Ejemplo" target="<sub>blank</sub>"
+tabindex="1"&gt;Ejemplo&lt;/a&gt; se representa como Ejemplo).</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline6">
+<h2 id="orgheadline6">Etiquetas básicas</h2>
+<ul>
+<li>&lt;div&gt;: división de  la página. Se recomienda,  junto con css, en  vez de &lt;table&gt;
+cuando se desea alinear contenido.</li>
+
+<li>&lt;img&gt;: imagen. Requiere del atributo src, que indica la ruta en la que se
+encuentra la imagen. Por ejemplo: &lt;img src="./imágenes/mifoto.jpg" /&gt;. Es
+conveniente, por accesibilidad, poner un atributo alt="texto alternativo".</li>
+
+<li>&lt;li&gt;&lt;ol&gt;&lt;ul&gt;: etiquetas para listas.</li>
+
+<li>&lt;b&gt;: texto en negrita (etiqueta desaprobada. Se recomienda usar la etiqueta</li>
+
+</ul>
+<p>
+&lt;strong&gt;).
+</p>
+
+<ul>
+<li>&lt;i&gt;: texto en cursiva (etiqueta desaprobada. Se recomienda usar la etiqueta &lt;em&gt;).</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline7">
+<h2 id="orgheadline7">Etiquetas básicas</h2>
+<ul>
+<li>&lt;s&gt;: texto tachado (etiqueta desaprobada. Se recomienda usar la etiqueta &lt;del&gt;).</li>
+
+<li>&lt;u&gt;: Antes texto subrayado. A partir de HTML 5 define porciones de texto
+diferenciadas o destacadas del resto, para indicar correcciones por
+ejemplo. (etiqueta desaprobada en HTML 4.01 y redefinida en HTML 5)</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<p> Created by yjwen. </p>
+
+<script src="file:///home/miguel/reveal.js/js/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/miguel/reveal.js/js/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/miguel/reveal.js/js/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+ { src: 'file:///home/miguel/reveal.js/js/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/reveal.js/js/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/reveal.js/js/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>

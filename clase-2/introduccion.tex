@@ -1,0 +1,160 @@
+% Created 2016-02-17 mié 16:55
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Miguel Piña}
+\date{\textit{[2016-02-16 mar 10:22]}}
+\title{Introducción a HTML y CSS}
+\hypersetup{
+ pdfauthor={Miguel Piña},
+ pdftitle={Introducción a HTML y CSS},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 24.5.4 (Org mode 8.3.3)},
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+
+
+
+
+\section*{¿Qué es HTML?}
+\label{sec:orgheadline1}
+
+\begin{itemize}
+\item HTML siglas de HyperText Markup Language («lenguaje de marcas de hipertexto»).
+\item Sirve para la elaboración de páginas web.
+\item Es un estándar para la escritura de páginas web.
+\item Está a cargo de la W3C.
+\item El procesamiento de las páginas web recae en los navegadores.
+\item La estandarización permite que sea interpretada por cualquier navegador web.
+\end{itemize}
+
+\section*{Estructura de un documento HTML}
+\label{sec:orgheadline2}
+
+\begin{itemize}
+\item Ejemplo
+\end{itemize}
+
+\begin{verbatim}
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Ejemplo1</title>
+  </head>
+  <body>
+    <p>Párrafo de ejemplo</p>
+  </body>
+</html>
+\end{verbatim}
+
+\section*{Etiquetas básicas}
+\label{sec:orgheadline3}
+
+\begin{itemize}
+\item <html>: define el inicio del documento HTML, le indica al navegador que lo que
+viene a continuación debe ser interpretado como código HTML. Esto es así de
+facto, ya que en teoría lo que define el tipo de documento es el DOCTYPE, que
+significa la palabra justo tras DOCTYPE el tag de raíz.
+
+\item <script>: incrusta un script en una web, o llama a uno mediante src="url del
+script". Se recomienda incluir el tipo MIME en el atributo type, en el caso de
+JavaScript text/javascript.
+
+\item <head>: define la cabecera del documento HTML; esta cabecera suele contener
+información sobre el documento que no se muestra directamente al usuario como,
+por ejemplo, el título de la ventana del navegador.
+\end{itemize}
+
+\section*{Etiquetas básicas}
+\label{sec:orgheadline4}
+
+\begin{itemize}
+\item <title>: define el título de la página. Por lo general, el título aparece en la
+barra de título encima de la ventana.
+
+\item <link>: para vincular el sitio a hojas de estilo o iconos. Por ejemplo:
+<link rel="stylesheet" href="/style.css" type="text/css">.
+
+\item <style>: para colocar el estilo interno de la página; ya sea usando CSS u otros
+lenguajes similares. No es necesario colocarlo si se va a vincular a un archivo
+externo usando la etiqueta <link>.
+
+\item <meta>: para metadatos como la autoría o la licencia, incluso para indicar
+parámetros http (mediante http-equiv="") cuando no se pueden modificar por no
+estar disponible la configuración o por dificultades con server-side scripting.
+\end{itemize}
+
+\section*{Etiquetas básicas}
+\label{sec:orgheadline5}
+
+\begin{itemize}
+\item <body>: define el contenido principal o cuerpo del documento. Esta es la parte
+del documento html que se muestra en el navegador; dentro de esta etiqueta
+pueden definirse propiedades comunes a toda la página, como color de fondo y
+márgenes. Dentro del cuerpo <body> es posible encontrar numerosas etiquetas. A
+continuación se indican algunas a modo de ejemplo:
+
+\item <h1> a <h6>: encabezados o títulos del documento con diferente relevancia.
+
+\item <table>: define una tabla.
+
+\item <tr>: fila de una tabla.
+
+\item <td>: celda de una tabla (debe estar dentro de una fila).
+
+\item <a>: hipervínculo o enlace, dentro o fuera del sitio web. Debe definirse el
+parámetro de pasada por medio del atributo href. Por ejemplo: <a
+href="\url{http://www.example.com}" title="Ejemplo" target="\(_{\text{blank}}\)"
+tabindex="1">Ejemplo</a> se representa como Ejemplo).
+\end{itemize}
+
+\section*{Etiquetas básicas}
+\label{sec:orgheadline6}
+
+\begin{itemize}
+\item <div>: división de  la página. Se recomienda,  junto con css, en  vez de <table>
+cuando se desea alinear contenido.
+
+\item <img>: imagen. Requiere del atributo src, que indica la ruta en la que se
+encuentra la imagen. Por ejemplo: <img src="./imágenes/mifoto.jpg" />. Es
+conveniente, por accesibilidad, poner un atributo alt="texto alternativo".
+
+\item <li><ol><ul>: etiquetas para listas.
+
+\item <b>: texto en negrita (etiqueta desaprobada. Se recomienda usar la etiqueta
+\end{itemize}
+<strong>).
+
+\begin{itemize}
+\item <i>: texto en cursiva (etiqueta desaprobada. Se recomienda usar la etiqueta <em>).
+\end{itemize}
+
+\section*{Etiquetas básicas}
+\label{sec:orgheadline7}
+
+\begin{itemize}
+\item <s>: texto tachado (etiqueta desaprobada. Se recomienda usar la etiqueta <del>).
+
+\item <u>: Antes texto subrayado. A partir de HTML 5 define porciones de texto
+diferenciadas o destacadas del resto, para indicar correcciones por
+ejemplo. (etiqueta desaprobada en HTML 4.01 y redefinida en HTML 5)
+\end{itemize}
+\end{document}

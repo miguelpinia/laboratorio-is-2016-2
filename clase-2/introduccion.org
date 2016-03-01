@@ -1,0 +1,123 @@
+#+REVEAL_ROOT: file:///home/miguel/reveal.js/js/reveal.js
+#+title: Introducción a HTML y CSS
+#+author: Miguel Piña
+#+date: [2016-02-16 mar 10:22]
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: moon
+#+REVEAL_HLEVEL: 2
+#+REVEAL_HEAD_PREAMBLE: <meta name="description" content="Org-Reveal Introduction.">
+#+REVEAL_POSTAMBLE: <p> Created by yjwen. </p>
+#+REVEAL_PLUGINS: (highlight markdown notes)
+#+REVEAL_EXTRA_CSS: /home/miguel/reveal.js/local.css
+
+
+
+
+* ¿Qué es HTML?
+
+- HTML siglas de HyperText Markup Language («lenguaje de marcas de hipertexto»).
+- Sirve para la elaboración de páginas web.
+- Es un estándar para la escritura de páginas web.
+- Está a cargo de la W3C.
+- El procesamiento de las páginas web recae en los navegadores.
+- La estandarización permite que sea interpretada por cualquier navegador web.
+
+* Estructura de un documento HTML
+
+- Ejemplo
+
+#+begin_src html
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Ejemplo1</title>
+  </head>
+  <body>
+    <p>Párrafo de ejemplo</p>
+  </body>
+</html>
+#+end_src
+
+* Etiquetas básicas
+
+- <html>: define el inicio del documento HTML, le indica al navegador que lo que
+  viene a continuación debe ser interpretado como código HTML. Esto es así de
+  facto, ya que en teoría lo que define el tipo de documento es el DOCTYPE, que
+  significa la palabra justo tras DOCTYPE el tag de raíz.
+
+- <script>: incrusta un script en una web, o llama a uno mediante src="url del
+  script". Se recomienda incluir el tipo MIME en el atributo type, en el caso de
+  JavaScript text/javascript.
+
+- <head>: define la cabecera del documento HTML; esta cabecera suele contener
+  información sobre el documento que no se muestra directamente al usuario como,
+  por ejemplo, el título de la ventana del navegador.
+
+* Etiquetas básicas
+
+- <title>: define el título de la página. Por lo general, el título aparece en la
+  barra de título encima de la ventana.
+
+- <link>: para vincular el sitio a hojas de estilo o iconos. Por ejemplo:
+  <link rel="stylesheet" href="/style.css" type="text/css">.
+
+- <style>: para colocar el estilo interno de la página; ya sea usando CSS u otros
+  lenguajes similares. No es necesario colocarlo si se va a vincular a un archivo
+  externo usando la etiqueta <link>.
+
+- <meta>: para metadatos como la autoría o la licencia, incluso para indicar
+  parámetros http (mediante http-equiv="") cuando no se pueden modificar por no
+  estar disponible la configuración o por dificultades con server-side scripting.
+
+* Etiquetas básicas
+
+- <body>: define el contenido principal o cuerpo del documento. Esta es la parte
+  del documento html que se muestra en el navegador; dentro de esta etiqueta
+  pueden definirse propiedades comunes a toda la página, como color de fondo y
+  márgenes. Dentro del cuerpo <body> es posible encontrar numerosas etiquetas. A
+  continuación se indican algunas a modo de ejemplo:
+
+- <h1> a <h6>: encabezados o títulos del documento con diferente relevancia.
+
+- <table>: define una tabla.
+
+- <tr>: fila de una tabla.
+
+- <td>: celda de una tabla (debe estar dentro de una fila).
+
+- <a>: hipervínculo o enlace, dentro o fuera del sitio web. Debe definirse el
+  parámetro de pasada por medio del atributo href. Por ejemplo: <a
+  href="http://www.example.com" title="Ejemplo" target="_blank"
+  tabindex="1">Ejemplo</a> se representa como Ejemplo).
+
+* Etiquetas básicas
+
+- <div>: división de  la página. Se recomienda,  junto con css, en  vez de <table>
+  cuando se desea alinear contenido.
+
+- <img>: imagen. Requiere del atributo src, que indica la ruta en la que se
+  encuentra la imagen. Por ejemplo: <img src="./imágenes/mifoto.jpg" />. Es
+  conveniente, por accesibilidad, poner un atributo alt="texto alternativo".
+
+- <li><ol><ul>: etiquetas para listas.
+
+- <b>: texto en negrita (etiqueta desaprobada. Se recomienda usar la etiqueta
+<strong>).
+
+- <i>: texto en cursiva (etiqueta desaprobada. Se recomienda usar la etiqueta <em>).
+
+* Etiquetas básicas
+
+- <s>: texto tachado (etiqueta desaprobada. Se recomienda usar la etiqueta <del>).
+
+- <u>: Antes texto subrayado. A partir de HTML 5 define porciones de texto
+  diferenciadas o destacadas del resto, para indicar correcciones por
+  ejemplo. (etiqueta desaprobada en HTML 4.01 y redefinida en HTML 5)
