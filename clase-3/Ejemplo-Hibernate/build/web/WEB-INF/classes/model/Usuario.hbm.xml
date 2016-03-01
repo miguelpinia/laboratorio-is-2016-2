@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/02/2016 04:40:04 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Usuario" table="usuario" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="apellidos" type="string">
+            <column name="apellidos" />
+        </property>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="13" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" />
+        </property>
+    </class>
+</hibernate-mapping>
