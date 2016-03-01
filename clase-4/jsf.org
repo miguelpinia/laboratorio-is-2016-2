@@ -1,0 +1,98 @@
+#+REVEAL_ROOT: file:///home/miguel/proyectos/reveal.js
+#+title: Java Server Faces
+#+author: Miguel Piña
+#+date: [2016-02-29 lun 16:27]
+
+#+REVEAL_ROOT: file:///home/miguel/proyectos/reveal.js
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_single_file:ni
+#+OPTIONS: toc:nil
+
+#+REVEAL_THEME: night
+#+REVEAL_EXTRA_CSS: file:///home/miguel/proyectos/reveal.js/presentation.css
+#+REVEAL_TRANS: slide
+#+REVEAL_SPEED: slow
+
+
+* Objetivo
+#+ATTR_REVEAL: :frag (roll-in)
+- Conocer más sobre la tecnología Java Server Faces
+- Implementar un ejemplo de prueba de con Java Server Faces
+
+* ¿Qué es Java Server Faces?
+#+ATTR_REVEAL: :frag (roll-in)
+- Es una tecnología y framework para aplicaciones Java basadas en web
+- Simplifica el desarrollo de interfaces de usuario en aplicaciones Java EE.
+- JSF usa JavaServer Pages (JSP) como la tecnología que permite hacer el despliegue de las páginas
+- También se puede acomodar a otras tecnologías como XUL (acrónimo de XML-based User-interface Language, lenguaje basado en XML para la interfaz de usuario)
+
+* ¿Qué incluye JSF?
+#+ATTR_REVEAL: :frag (roll-in)
+- Un conjunto de APIs para representar componentes de una interfaz de usuario y administrar su estado, manejar eventos, validar entrada, definir un esquema de navegación de las páginas y dar soporte para internacionalización y accesibilidad.
+- Un conjunto por defecto de componentes para la interfaz de usuario.
+- Dos bibliotecas de etiquetas personalizadas para JavaServer Pages que permiten expresar una interfaz JavaServer Faces dentro de una página JSP.
+- Un modelo de eventos en el lado del servidor.
+- Administración de estados.
+- Beans administrados.
+
+* Objetivos
+#+ATTR_REVEAL: :frag (roll-in)
+- Definir un conjunto simple de clases base de Java para componentes de la interfaz de usuario, estado de los componentes y eventos de entrada.
+- Proporcionar un conjunto de componentes para la interfaz de usuario, incluyendo los elementos estándares de HTML para representar un formulario,
+- Proporcionar un modelo de JavaBeans para enviar eventos desde los controles de la interfaz de usuario del lado del cliente a la aplicación del servidor.
+- Definir APIs para la validación de entrada, incluyendo soporte para la validación en el lado del cliente.
+- Especificar un modelo para la internacionalización y localización de la interfaz de usuario.
+- Automatizar la generación de salidas apropiadas para el objetivo del cliente, teniendo en cuenta todos los datos de configuración disponibles del cliente, como versión del navegador.
+
+* Managed Beans
+#+ATTR_REVEAL: :frag (roll-in)
+- Son java beans registrados con JSF
+- Contiene métodos get y set, lógica de negocios o backing beans (Beans con todo el html).
+- Trabajan como modelo para la UI
+- En JSF 1.2, se trabajan a partir de xml.
+- En JSF 2.0 se trabajan a partir de anotaciones.
+
+* Ejemplo
+
+#+begin_src xml
+<managed-bean>
+  <managed-bean-name>helloWorld</managed-bean-name>
+  <managed-bean-class>com.tutorialspoint.test.HelloWorld</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+<managed-bean>
+  <managed-bean-name>message</managed-bean-name>
+  <managed-bean-class>com.tutorialspoint.test.Message</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+</managed-bean>
+#+end_src
+
+
+* Anotación @ManagedBean
+#+ATTR_REVEAL: :frag (roll-in)
+- Indica que un ben debe ser gestionado con el nombre especificado en el atributo name.
+- Si no se indica, toma el nombre de la clase
+- Otro atributo es eager, que indica si un bean debe ser creado al momento de ser solicitado o no.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src java
+@ManagedBean(name = "helloWorld", eager = true)
+@RequestScoped
+public class HelloWorld {
+
+   @ManagedProperty(value="#{message}")
+   private Message message;
+   ...
+}
+#+end_src
+
+
+* Scope Anotations
+#+ATTR_REVEAL: :frag (roll-in)
+- @RequestScoped El bean vive tanto como el response de HTTP.
+- @NoneScoped El bean vive durante una sóla evaluación.
+- @ViewScoped El bean vive tanto como el usario interactué con el JSF.
+- @SessionScoped El bean vive tanto como dure la sesión web.
+- @ApplicationScoped El bean vive tanto como la aplicación web vive.
+- @CustomScoped El bean vive de acuerdo a como lo especifique el desarrollador.

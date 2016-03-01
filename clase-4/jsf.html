@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Java Server Faces</title>
+<meta name="author" content="(Miguel Piña)"/>
+
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/theme/night.css" id="theme"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/presentation.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/miguel/proyectos/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Java Server Faces</h1>
+<h2>Miguel Piña</h2>
+<h2><a href="mailto:miguel_pinia@ciencias.unam.mx">miguel_pinia@ciencias.unam.mx</a></h2>
+<h2><span class="timestamp-wrapper"><span class="timestamp">[2016-02-29 lun 16:27]</span></span></h2>
+</section>
+
+
+<section>
+<section id="slide-orgheadline1">
+<h2 id="orgheadline1">Objetivo</h2>
+<ul>
+<li class="fragment roll-in">Conocer más sobre la tecnología Java Server Faces</li>
+<li class="fragment roll-in">Implementar un ejemplo de prueba de con Java Server Faces</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline2">
+<h2 id="orgheadline2">¿Qué es Java Server Faces?</h2>
+<ul>
+<li class="fragment roll-in">Es una tecnología y framework para aplicaciones Java basadas en web</li>
+<li class="fragment roll-in">Simplifica el desarrollo de interfaces de usuario en aplicaciones Java EE.</li>
+<li class="fragment roll-in">JSF usa JavaServer Pages (JSP) como la tecnología que permite hacer el despliegue de las páginas</li>
+<li class="fragment roll-in">También se puede acomodar a otras tecnologías como XUL (acrónimo de XML-based User-interface Language, lenguaje basado en XML para la interfaz de usuario)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline3">
+<h2 id="orgheadline3">¿Qué incluye JSF?</h2>
+<ul>
+<li class="fragment roll-in">Un conjunto de APIs para representar componentes de una interfaz de usuario y administrar su estado, manejar eventos, validar entrada, definir un esquema de navegación de las páginas y dar soporte para internacionalización y accesibilidad.</li>
+<li class="fragment roll-in">Un conjunto por defecto de componentes para la interfaz de usuario.</li>
+<li class="fragment roll-in">Dos bibliotecas de etiquetas personalizadas para JavaServer Pages que permiten expresar una interfaz JavaServer Faces dentro de una página JSP.</li>
+<li class="fragment roll-in">Un modelo de eventos en el lado del servidor.</li>
+<li class="fragment roll-in">Administración de estados.</li>
+<li class="fragment roll-in">Beans administrados.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline4">
+<h2 id="orgheadline4">Objetivos</h2>
+<ul>
+<li class="fragment roll-in">Definir un conjunto simple de clases base de Java para componentes de la interfaz de usuario, estado de los componentes y eventos de entrada.</li>
+<li class="fragment roll-in">Proporcionar un conjunto de componentes para la interfaz de usuario, incluyendo los elementos estándares de HTML para representar un formulario,</li>
+<li class="fragment roll-in">Proporcionar un modelo de JavaBeans para enviar eventos desde los controles de la interfaz de usuario del lado del cliente a la aplicación del servidor.</li>
+<li class="fragment roll-in">Definir APIs para la validación de entrada, incluyendo soporte para la validación en el lado del cliente.</li>
+<li class="fragment roll-in">Especificar un modelo para la internacionalización y localización de la interfaz de usuario.</li>
+<li class="fragment roll-in">Automatizar la generación de salidas apropiadas para el objetivo del cliente, teniendo en cuenta todos los datos de configuración disponibles del cliente, como versión del navegador.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline5">
+<h2 id="orgheadline5">Managed Beans</h2>
+<ul>
+<li class="fragment roll-in">Son java beans registrados con JSF</li>
+<li class="fragment roll-in">Contiene métodos get y set, lógica de negocios o backing beans (Beans con todo el html).</li>
+<li class="fragment roll-in">Trabajan como modelo para la UI</li>
+<li class="fragment roll-in">En JSF 1.2, se trabajan a partir de xml.</li>
+<li class="fragment roll-in">En JSF 2.0 se trabajan a partir de anotaciones.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline6">
+<h2 id="orgheadline6">Ejemplo</h2>
+<div class="org-src-container">
+
+<pre  class="src src-xml">&lt;<span style="color: #A6E22E;">managed-bean</span>&gt;
+  &lt;<span style="color: #A6E22E;">managed-bean-name</span>&gt;helloWorld&lt;/<span style="color: #A6E22E;">managed-bean-name</span>&gt;
+  &lt;<span style="color: #A6E22E;">managed-bean-class</span>&gt;com.tutorialspoint.test.HelloWorld&lt;/<span style="color: #A6E22E;">managed-bean-class</span>&gt;
+  &lt;<span style="color: #A6E22E;">managed-bean-scope</span>&gt;request&lt;/<span style="color: #A6E22E;">managed-bean-scope</span>&gt;
+&lt;/<span style="color: #A6E22E;">managed-bean</span>&gt;
+&lt;<span style="color: #A6E22E;">managed-bean</span>&gt;
+  &lt;<span style="color: #A6E22E;">managed-bean-name</span>&gt;message&lt;/<span style="color: #A6E22E;">managed-bean-name</span>&gt;
+  &lt;<span style="color: #A6E22E;">managed-bean-class</span>&gt;com.tutorialspoint.test.Message&lt;/<span style="color: #A6E22E;">managed-bean-class</span>&gt;
+  &lt;<span style="color: #A6E22E;">managed-bean-scope</span>&gt;request&lt;/<span style="color: #A6E22E;">managed-bean-scope</span>&gt;
+&lt;/<span style="color: #A6E22E;">managed-bean</span>&gt;
+</pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline7">
+<h2 id="orgheadline7">Anotación @ManagedBean</h2>
+<ul>
+<li class="fragment roll-in">Indica que un ben debe ser gestionado con el nombre especificado en el atributo name.</li>
+<li class="fragment roll-in">Si no se indica, toma el nombre de la clase</li>
+<li class="fragment roll-in">Otro atributo es eager, que indica si un bean debe ser creado al momento de ser solicitado o no.</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)"><span style="color: #AE81FF;">@ManagedBean</span><span style="color: #A1EFE4;">(</span>name = <span style="color: #E6DB74;">"helloWorld"</span>, eager = <span style="color: #AE81FF;">true</span><span style="color: #A1EFE4;">)</span>
+<span style="color: #AE81FF;">@RequestScoped</span>
+<span style="color: #F92672;">public</span> <span style="color: #F92672;">class</span> <span style="color: #66D9EF;">HelloWorld</span> <span style="color: #A1EFE4;">{</span>
+
+   <span style="color: #AE81FF;">@ManagedProperty</span><span style="color: #E6DB74;">(</span>value=<span style="color: #E6DB74;">"#{message}"</span><span style="color: #E6DB74;">)</span>
+   <span style="color: #F92672;">private</span> <span style="color: #66D9EF;">Message</span> <span style="color: #FD971F;">message</span>;
+   ...
+<span style="color: #A1EFE4;">}</span>
+</pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline8">
+<h2 id="orgheadline8">Scope Anotations</h2>
+<ul>
+<li class="fragment roll-in">@RequestScoped El bean vive tanto como el response de HTTP.</li>
+<li class="fragment roll-in">@NoneScoped El bean vive durante una sóla evaluación.</li>
+<li class="fragment roll-in">@ViewScoped El bean vive tanto como el usario interactué con el JSF.</li>
+<li class="fragment roll-in">@SessionScoped El bean vive tanto como dure la sesión web.</li>
+<li class="fragment roll-in">@ApplicationScoped El bean vive tanto como la aplicación web vive.</li>
+<li class="fragment roll-in">@CustomScoped El bean vive de acuerdo a como lo especifique el desarrollador.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+
+<script src="file:///home/miguel/proyectos/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/miguel/proyectos/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'slide', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'slow',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/miguel/proyectos/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
