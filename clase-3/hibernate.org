@@ -1,0 +1,45 @@
+#+REVEAL_ROOT: file:///home/miguel/proyectos/reveal.js
+#+title: Hibernate
+#+author: Miguel Piña
+#+date: [2016-02-23]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_single_file:ni
+#+OPTIONS: toc:nil
+
+#+REVEAL_THEME: night
+#+REVEAL_EXTRA_CSS: file:///home/miguel/proyectos/reveal.js/presentation.css
+#+REVEAL_TRANS: slide
+#+REVEAL_SPEED: slow
+
+* Objetivo
+#+ATTR_REVEAL: :frag (roll-in)
+- Conocer más sobre la tecnología Hibernate
+- Implementar un ejemplo de prueba con Hibernate
+
+* ¿Qué es Hibernate?
+#+ATTR_REVEAL: :frag (roll-in)
+- Herramienta de mapeo Objeto-Relacional (ORM) para Java.
+- Realiza mapeos de atributos entre una base de datos relacional y el modelo de Objetos
+- Usa archivos declarativos mediante XML o anotaciones en los beans.
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:images/Hibernate.png]]
+
+* ¿Cuándo lo uso?
+#+ATTR_REVEAL: :frag (roll-in)
+- Desarrollo de soluciones genéricas
+- Situaciones en los que el modelo de datos vaya a cambiar
+- Aplicaciones que requieran el uso de CRUD (Create, Read, Update y Delete).
+
+* Ejemplo
+*Objetivo*
+#+ATTR_REVEAL: :frag (roll-in)
+- Crear una aplicación web que haga uso de Hibernate
+- Conocer el proceso que hace uso de la generación de configuración para Hibernate
+* ¿Donde obtener más información?
+
+- [[http://hibernate.org/orm/][Hibernate ORM]]
+- [[https://docs.jboss.org/hibernate/orm/5.0/userGuide/en-US/html_single/][Guía del usuario]]

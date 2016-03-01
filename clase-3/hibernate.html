@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Hibernate</title>
+<meta name="author" content="(Miguel Piña)"/>
+
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/theme/night.css" id="theme"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/presentation.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/miguel/proyectos/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Hibernate</h1>
+<h2>Miguel Piña</h2>
+<h2><a href="mailto:miguel_pinia@ciencias.unam.mx">miguel_pinia@ciencias.unam.mx</a></h2>
+<h2><span class="timestamp-wrapper"><span class="timestamp">[2016-02-23 mar]</span></span></h2>
+</section>
+
+<section>
+<section id="slide-orgheadline1">
+<h2 id="orgheadline1">Objetivo</h2>
+<ul>
+<li class="fragment roll-in">Conocer más sobre la tecnología Hibernate</li>
+<li class="fragment roll-in">Implementar un ejemplo de prueba con Hibernate</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline2">
+<h2 id="orgheadline2">¿Qué es Hibernate?</h2>
+<ul>
+<li class="fragment roll-in">Herramienta de mapeo Objeto-Relacional (ORM) para Java.</li>
+<li class="fragment roll-in">Realiza mapeos de atributos entre una base de datos relacional y el modelo de Objetos</li>
+<li class="fragment roll-in">Usa archivos declarativos mediante XML o anotaciones en los beans.</li>
+
+</ul>
+
+<div class="figure">
+<p><img src="images/Hibernate.png" alt="Hibernate.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline3">
+<h2 id="orgheadline3">¿Cuándo lo uso?</h2>
+<ul>
+<li class="fragment roll-in">Desarrollo de soluciones genéricas</li>
+<li class="fragment roll-in">Situaciones en los que el modelo de datos vaya a cambiar</li>
+<li class="fragment roll-in">Aplicaciones que requieran el uso de CRUD (Create, Read, Update y Delete).</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline4">
+<h2 id="orgheadline4">Ejemplo</h2>
+<p>
+<b>Objetivo</b>
+</p>
+<ul>
+<li class="fragment roll-in">Crear una aplicación web que haga uso de Hibernate</li>
+<li class="fragment roll-in">Conocer el proceso que hace uso de la generación de configuración para Hibernate</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgheadline5">
+<h2 id="orgheadline5">¿Donde obtener más información?</h2>
+<ul>
+<li><a href="http://hibernate.org/orm/">Hibernate ORM</a></li>
+<li><a href="https://docs.jboss.org/hibernate/orm/5.0/userGuide/en-US/html_single/">Guía del usuario</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+
+<script src="file:///home/miguel/proyectos/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/miguel/proyectos/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'slide', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'slow',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/miguel/proyectos/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>
