@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Java Server Faces</title>
+<meta name="author" content="(Miguel Piña)"/>
+
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/theme/night.css" id="theme"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/presentation.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/miguel/proyectos/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Java Server Faces</h1>
+<h2>Miguel Piña</h2>
+<h2><a href="mailto:miguel_pinia@ciencias.unam.mx">miguel_pinia@ciencias.unam.mx</a></h2>
+<h2><span class="timestamp-wrapper"><span class="timestamp">[2016-03-07 lun 19:03]</span></span></h2>
+</section>
+
+
+<section>
+<section id="slide-orgheadline26">
+<h2 id="orgheadline26">Las etiquetas JSF</h2>
+<p class="fragment (roll-in)">
+JSf dispone de un conjunto básico de etiquetas que permiten crear fácilmente componentes dinámicos en las páginas web. Estas etiquetas son:
+</p>
+</section>
+<section id="slide-orgheadline1">
+<h3 id="orgheadline1">h:commandButton</h3>
+<p class="fragment (roll-in)">
+<b>h:commandButton</b>. Un botón al que podemos asociar una acción.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.checkoutLabel}"</span>
+                     <span style="color: #FD971F;">action</span>=<span style="color: #E6DB74;">"#{shoppingCartBean.checkout}"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/commandButton.png" alt="commandButton.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline2">
+<h3 id="orgheadline2">h:commandLink</h3>
+<p class="fragment (roll-in)">
+<b>h:commandLink</b>. Un enlace de hipertexto al que podemos asociar una acción.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandLink</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.checkoutLabel}"</span>
+                   <span style="color: #FD971F;">action</span>=<span style="color: #E6DB74;">"#{shoppingCartBean.checkout}"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/commandLink.png" alt="commandLink.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline3">
+<h3 id="orgheadline3">h:dataTable</h3>
+<p class="fragment (roll-in)">
+<b>h:dataTable</b>. Crea una tabla de datos dinámica con los elementos de una propiedad de tipo Array o Map del bean.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">dataTable</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"table1"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{shoppingCartBean.items}"</span> <span style="color: #FD971F;">var</span>=<span style="color: #E6DB74;">"item"</span>
+             <span style="color: #FD971F;">border</span>=<span style="color: #E6DB74;">"1"</span>&gt;
+    &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"header"</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Your Shopping Cart"</span> /&gt;
+    &lt;/<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">column</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"header"</span>&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Item Description"</span> /&gt;
+        &lt;/<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{item.description}"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">column</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">column</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"header"</span>&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Price"</span> /&gt;
+        &lt;/<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{item.price}"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">column</span>&gt;
+    &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"footer"</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Total: #{shoppingCartBean.total}"</span> /&gt;
+    &lt;/<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">dataTable</span>&gt;
+</pre>
+</div>
+</section>
+<section id="slide-orgheadline4">
+<h3 id="orgheadline4">h:dataTable</h3>
+
+<div class="figure">
+<p><img src="img/dataTable.png" alt="dataTable.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline5">
+<h3 id="orgheadline5">h:form</h3>
+<p class="fragment (roll-in)">
+<b>h:form</b>. Define el formulario JSF en la página JSP-
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Enter your name: "</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{customerController.customer.firstName}"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/form.png" alt="form.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline6">
+<h3 id="orgheadline6">h:graphicImage</h3>
+<p class="fragment (roll-in)">
+<b>h:graphicImage</b>. Muestra una imagen jpg o similar.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">graphicImage</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"/images/box_shot.gif"</span> <span style="color: #FD971F;">width</span>=<span style="color: #E6DB74;">"200"</span> <span style="color: #FD971F;">height</span>=<span style="color: #E6DB74;">"171"</span> /&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/img.png" alt="img.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline7">
+<h3 id="orgheadline7">h:inputHidden</h3>
+<p class="fragment (roll-in)">
+<b>h:inputHidden</b>. Incluye un campo oculto del formulario.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"form_1"</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputHidden</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"123"</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"inputHidden_1"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+</section>
+<section id="slide-orgheadline8">
+<h3 id="orgheadline8">h:inputSecret</h3>
+<p class="fragment (roll-in)">
+<b>h:inputSecret</b>. Incluye un campo editable de tipo contraseña (no muestra lo que se escribe)
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Username: "</span> <span style="color: #FD971F;">style</span>=<span style="color: #E6DB74;">"font-weight:bold"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.username}"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Password: "</span> <span style="color: #FD971F;">style</span>=<span style="color: #E6DB74;">"font-weight:bold"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputSecret</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.password}"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Login"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/inputSecret.png" alt="inputSecret.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline9">
+<h3 id="orgheadline9">h:inputText</h3>
+<p class="fragment (roll-in)">
+<b>h:inputText</b>. Incluye un campo de texto normal.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Username: "</span> <span style="color: #FD971F;">style</span>=<span style="color: #E6DB74;">"font-weight:bold"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.username}"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Password: "</span> <span style="color: #FD971F;">style</span>=<span style="color: #E6DB74;">"font-weight:bold"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputSecret</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.password}"</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Login"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/inputSecret.png" alt="inputSecret.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline10">
+<h3 id="orgheadline10">h:inputTextarea</h3>
+<p class="fragment (roll-in)">
+<b>h:inputTextarea</b>. Incluye un campo de texto multilínea.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Survey question: "</span> /&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputTextarea</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{surveyController.questions[1].comments}"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/inputTextArea.png" alt="inputTextArea.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline11">
+<h3 id="orgheadline11">h:message</h3>
+<p class="fragment (roll-in)">
+<b>h:message</b>. Imprime un mensaje de error en la página (si se ha producido alguno).
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">message</span> <span style="color: #FD971F;">errorStyle</span>=<span style="color: #E6DB74;">"color:red; display:block"</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"myInput"</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"myInput"</span> <span style="color: #FD971F;">required</span>=<span style="color: #E6DB74;">"true"</span> <span style="color: #FD971F;">label</span>=<span style="color: #E6DB74;">"My Input"</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Click"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/messages.png" alt="messages.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline12">
+<h3 id="orgheadline12">h:messages</h3>
+<p class="fragment (roll-in)">
+<b>h:messages</b>. Imprime varios mensajes de error en la página, si se han producido.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">messages</span> <span style="color: #FD971F;">errorStyle</span>=<span style="color: #E6DB74;">"color:red"</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">required</span>=<span style="color: #E6DB74;">"true"</span> <span style="color: #FD971F;">label</span>=<span style="color: #E6DB74;">"My Input"</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Click"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/messages.png" alt="messages.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline13">
+<h3 id="orgheadline13">h:outputFormat</h3>
+<p class="fragment (roll-in)">
+<b>h:outputFormat</b>. Muestra texto parametrizado. Utiliza la clase java.text.MessageFormat de formateo.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputFormat</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Welcome, {0}. You have {1} new messages."</span>&gt;
+    &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">param</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.firstName}"</span> /&gt;
+    &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">param</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.messageCount}"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputFormat</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/outputFormat.png" alt="outputFormat.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline14">
+<h3 id="orgheadline14">h:outputLabel</h3>
+<p class="fragment (roll-in)">
+<b>h:outputLabel</b>. Muestra un texto fijo.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+&#160;&#160;&#160;&#160;&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"usernameLabel"</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"username"</span>
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;value=<span style="color: #E6DB74;">"#{messages.usernameLabel} "</span> /&gt;
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"username"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userBean.user.username}"</span> /&gt;
+&#160;&#160;&#160;&#160;&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+</section>
+<section id="slide-orgheadline15">
+<h3 id="orgheadline15">h:outputLink</h3>
+<p class="fragment (roll-in)">
+<b>h:outputLink</b>. Crea un enlace de hipertexto.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLink</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"link1"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"http://www.mycompany.com"</span>&gt;
+    &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">param</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"projectId"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"123"</span> /&gt;
+    &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">param</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"userId"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"45"</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"Open Project"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLink</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/outputlink.png" alt="outputlink.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline16">
+<h3 id="orgheadline16">h:outputText</h3>
+<p class="fragment (roll-in)">
+<b>h:outputText</b>
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.welcomeMessage}"</span> <span style="color: #FD971F;">style</span>=<span style="color: #E6DB74;">"font-weight:bold"</span> /&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/outputText.png" alt="outputText.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline17">
+<h3 id="orgheadline17">h:panelGrid</h3>
+<p class="fragment (roll-in)">
+<b>h:panelGrid</b>. Crea una tabla con los componentes incluidos en el panelGrid.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"panel"</span> <span style="color: #FD971F;">columns</span>=<span style="color: #E6DB74;">"2"</span> <span style="color: #FD971F;">border</span>=<span style="color: #E6DB74;">"1"</span> <span style="color: #FD971F;">cellpadding</span>=<span style="color: #E6DB74;">"0"</span> <span style="color: #FD971F;">cellspacing</span>=<span style="color: #E6DB74;">"2"</span>&gt;
+   &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"header"</span>&gt;
+      &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputText</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.signInMessage}"</span>/&gt;
+   &lt;/<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span>&gt;
+   &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"username"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.usernameLabel}"</span> /&gt;
+   &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"username"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.username}"</span> /&gt;
+   &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"password"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.passwordLabel}"</span> /&gt;
+   &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"password"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.password}"</span> /&gt;
+   &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span> <span style="color: #FD971F;">name</span>=<span style="color: #E6DB74;">"footer"</span>&gt;
+   &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span> <span style="color: #FD971F;">style</span>=<span style="color: #E6DB74;">"display:block; text-align:center"</span>&gt;
+      &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"submit"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.submitLabel}"</span> /&gt;
+   &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+   &lt;/<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">facet</span>&gt;
+ &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/panelGrid.png" alt="panelGrid.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline18">
+<h3 id="orgheadline18">h:panelGroup</h3>
+<p class="fragment (roll-in)">
+<b>h:panelGroup</b>. Agrupa varios componentes para que cierto componente los trate como un único componente (por ejemplo para meter varios componentes en una celda de un panelGrid.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"form"</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"grid"</span> <span style="color: #FD971F;">columns</span>=<span style="color: #E6DB74;">"1"</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.usernameLabel} "</span> /&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputText</span> <span style="color: #FD971F;">label</span>=<span style="color: #E6DB74;">"#{messages.usernameLabel}"</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"username"</span>
+                         <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.username}"</span> <span style="color: #FD971F;">required</span>=<span style="color: #E6DB74;">"true"</span> /&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">message</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"username"</span> <span style="color: #FD971F;">errorClass</span>=<span style="color: #E6DB74;">"error"</span> /&gt;
+        &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.passwordLabel} "</span> /&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">inputSecret</span> <span style="color: #FD971F;">label</span>=<span style="color: #E6DB74;">"#{messages.passwordLabel}"</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"password"</span>
+                         <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.username}"</span> <span style="color: #FD971F;">required</span>=<span style="color: #E6DB74;">"true"</span> /&gt;
+            &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">message</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"password"</span> <span style="color: #FD971F;">errorClass</span>=<span style="color: #E6DB74;">"error"</span> /&gt;
+        &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGroup</span>&gt;
+        &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">commandButton</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"submit"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.submitLabel}"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">panelGrid</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/panelGroup.png" alt="panelGroup.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline19">
+<h3 id="orgheadline19">h:selectBooleanCheckbox</h3>
+<p class="fragment (roll-in)">
+<b>h:selectBooleanCheckbox</b>. Crea una casilla con dos estados: activado y desactivado.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectBooleanCheckbox</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"remember"</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{userController.user.remember}"</span> /&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">outputLabel</span> <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{messages.rememberMeLabel}"</span> <span style="color: #FD971F;">for</span>=<span style="color: #E6DB74;">"remember"</span> /&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectBooleanCheckbox.png" alt="selectBooleanCheckbox.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline20">
+<h3 id="orgheadline20">h:selectManyCheckbox</h3>
+<p class="fragment (roll-in)">
+<b>h:selectManyCheckbox</b>. Crea un conjunto de casillas activables.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectManyCheckbox</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"subscriptions"</span>
+                          <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{subscriptionController.subscriptions}"</span>
+                          <span style="color: #FD971F;">layout</span>=<span style="color: #E6DB74;">"pageDirection"</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item1"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"News"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"1"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item2"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Sports"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"2"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item3"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Music"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"3"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item4"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Java"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"4"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item5"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Web"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"5"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectManyCheckbox</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectManyCheckbox.png" alt="selectManyCheckbox.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline21">
+<h3 id="orgheadline21">h:selectManyListbox</h3>
+<p class="fragment (roll-in)">
+<b>h:selectManyListbox</b>. Crea una lista que permite seleccionar múltiples elementos.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectManyListbox</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"subscriptions"</span>
+                         <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{subscriptionController.subscriptions}"</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item1"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"News"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"1"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item2"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Sports"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"2"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item3"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Music"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"3"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item4"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Java"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"4"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item5"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Web"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"5"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectManyListbox</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectManyListbox.png" alt="selectManyListbox.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline22">
+<h3 id="orgheadline22">h:selectManyMenu</h3>
+<p class="fragment (roll-in)">
+<b>h:selectManyMenu</b>. Crea una lista desplegable de selección múltiple.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectManyMenu</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"subscriptions"</span>
+                      <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{subscriptionController.subscriptions}"</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item1"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"News"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"1"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item2"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Sports"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"2"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item3"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Music"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"3"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item4"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Java"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"4"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item5"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Web"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"5"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectManyMenu</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectManyMenu.png" alt="selectManyMenu.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline23">
+<h3 id="orgheadline23">h:selectOneListbox</h3>
+<p class="fragment (roll-in)">
+<b>h:selectOneListbox</b>. Crea una lista en la que se puede seleccionar un único elemento.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectOneListbox</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"subscriptions"</span>
+                        <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{subscriptionController.subscriptions}"</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item1"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"News"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"1"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item2"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Sports"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"2"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item3"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Music"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"3"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item4"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Java"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"4"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item5"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Web"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"5"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectOneListbox</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectOneListbox.png" alt="selectOneListbox.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline24">
+<h3 id="orgheadline24">h:selectOneMenu</h3>
+<p class="fragment (roll-in)">
+<b>h:selectOneMenu</b>. Crea na lista desplegable de selección.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectOneMenu</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"subscriptions"</span>
+                     <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{subscriptionController.subscriptions}"</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item1"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"News"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"1"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item2"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Sports"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"2"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item3"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Music"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"3"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item4"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Java"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"4"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item5"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Web"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"5"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectOneMenu</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectOneMenu.png" alt="selectOneMenu.png" class="fragment (roll-in)" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgheadline25">
+<h3 id="orgheadline25">h:selectOneRadio</h3>
+<p class="fragment (roll-in)">
+<b>h:selectOneRadio</b>. Crea una lista de botones, redondos normalmente, excluyentes.
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">&lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+    &lt;<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectOneRadio</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"subscriptions"</span>
+                      <span style="color: #FD971F;">value</span>=<span style="color: #E6DB74;">"#{subscriptionController.subscriptions}"</span>&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item1"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"News"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"1"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item2"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Sports"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"2"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item3"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Music"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"3"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item4"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Java"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"4"</span> /&gt;
+        &lt;<span style="color: #F92672;">f</span>:<span style="color: #A6E22E;">selectItem</span> <span style="color: #FD971F;">id</span>=<span style="color: #E6DB74;">"item5"</span> <span style="color: #FD971F;">itemLabel</span>=<span style="color: #E6DB74;">"Web"</span> <span style="color: #FD971F;">itemValue</span>=<span style="color: #E6DB74;">"5"</span> /&gt;
+    &lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">selectOneRadio</span>&gt;
+&lt;/<span style="color: #F92672;">h</span>:<span style="color: #A6E22E;">form</span>&gt;
+</pre>
+</div>
+
+<div class="figure">
+<p><img src="img/selectOneRadio.png" alt="selectOneRadio.png" class="fragment (roll-in)" />
+</p>
+</div>
+</section>
+</section>
+</div>
+</div>
+
+<script src="file:///home/miguel/proyectos/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/miguel/proyectos/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'slide', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'slow',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/miguel/proyectos/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>

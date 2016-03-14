@@ -1,0 +1,417 @@
+#+REVEAL_ROOT: file:///home/miguel/proyectos/reveal.js
+#+title: Java Server Faces
+#+author: Miguel Piña
+#+date: [2016-03-07 lun 19:03]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_single_file:ni
+#+OPTIONS: toc:nil
+
+#+REVEAL_THEME: night
+#+REVEAL_EXTRA_CSS: file:///home/miguel/proyectos/reveal.js/presentation.css
+#+REVEAL_TRANS: slide
+#+REVEAL_SPEED: slow
+
+
+* Las etiquetas JSF
+#+ATTR_REVEAL: :frag (roll-in)
+JSf dispone de un conjunto básico de etiquetas que permiten crear fácilmente componentes dinámicos en las páginas web. Estas etiquetas son:
+** h:commandButton
+#+ATTR_REVEAL: :frag (roll-in)
+*h:commandButton*. Un botón al que podemos asociar una acción.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:commandButton value="#{messages.checkoutLabel}"
+                     action="#{shoppingCartBean.checkout}" />
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/commandButton.png]]
+
+** h:commandLink
+#+ATTR_REVEAL: :frag (roll-in)
+*h:commandLink*. Un enlace de hipertexto al que podemos asociar una acción.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:commandLink value="#{messages.checkoutLabel}"
+                   action="#{shoppingCartBean.checkout}" />
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/commandLink.png]]
+
+** h:dataTable
+#+ATTR_REVEAL: :frag (roll-in)
+*h:dataTable*. Crea una tabla de datos dinámica con los elementos de una propiedad de tipo Array o Map del bean.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:dataTable id="table1" value="#{shoppingCartBean.items}" var="item"
+             border="1">
+    <f:facet name="header">
+        <h:outputText value="Your Shopping Cart" />
+    </f:facet>
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="Item Description" />
+        </f:facet>
+        <h:outputText value="#{item.description}" />
+    </h:column>
+    <h:column>
+        <f:facet name="header">
+            <h:outputText value="Price" />
+        </f:facet>
+        <h:outputText value="#{item.price}" />
+    </h:column>
+    <f:facet name="footer">
+        <h:outputText value="Total: #{shoppingCartBean.total}" />
+    </f:facet>
+</h:dataTable>
+#+end_src
+** h:dataTable
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/dataTable.png]]
+
+** h:form
+#+ATTR_REVEAL: :frag (roll-in)
+*h:form*. Define el formulario JSF en la página JSP-
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:outputLabel value="Enter your name: " />
+    <h:inputText value="#{customerController.customer.firstName}" />
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/form.png]]
+
+** h:graphicImage
+#+ATTR_REVEAL: :frag (roll-in)
+*h:graphicImage*. Muestra una imagen jpg o similar.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:graphicImage value="/images/box_shot.gif" width="200" height="171" />
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/img.png]]
+
+** h:inputHidden
+#+ATTR_REVEAL: :frag (roll-in)
+*h:inputHidden*. Incluye un campo oculto del formulario.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form id="form_1">
+    <h:inputHidden value="123" id="inputHidden_1" />
+</h:form>
+#+end_src
+
+** h:inputSecret
+#+ATTR_REVEAL: :frag (roll-in)
+*h:inputSecret*. Incluye un campo editable de tipo contraseña (no muestra lo que se escribe)
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:panelGrid>
+        <h:outputLabel value="Username: " style="font-weight:bold" />
+        <h:inputText value="#{userController.user.username}" />
+        <h:outputLabel value="Password: " style="font-weight:bold" />
+        <h:inputSecret value="#{userController.user.password}" />
+        <h:commandButton value="Login" />
+    </h:panelGrid>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/inputSecret.png]]
+
+** h:inputText
+#+ATTR_REVEAL: :frag (roll-in)
+*h:inputText*. Incluye un campo de texto normal.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:panelGrid>
+        <h:outputLabel value="Username: " style="font-weight:bold" />
+        <h:inputText value="#{userController.user.username}" />
+        <h:outputLabel value="Password: " style="font-weight:bold" />
+        <h:inputSecret value="#{userController.user.password}" />
+        <h:commandButton value="Login" />
+    </h:panelGrid>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/inputSecret.png]]
+
+** h:inputTextarea
+#+ATTR_REVEAL: :frag (roll-in)
+*h:inputTextarea*. Incluye un campo de texto multilínea.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:panelGrid>
+        <h:outputLabel value="Survey question: " />
+        <h:inputTextarea value="#{surveyController.questions[1].comments}" />
+    </h:panelGrid>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/inputTextArea.png]]
+
+** h:message
+#+ATTR_REVEAL: :frag (roll-in)
+*h:message*. Imprime un mensaje de error en la página (si se ha producido alguno).
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:message errorStyle="color:red; display:block" for="myInput" />
+    <h:inputText id="myInput" required="true" label="My Input" />
+    <h:commandButton value="Click" />
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/messages.png]]
+
+** h:messages
+#+ATTR_REVEAL: :frag (roll-in)
+*h:messages*. Imprime varios mensajes de error en la página, si se han producido.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:messages errorStyle="color:red" />
+    <h:inputText required="true" label="My Input" />
+    <h:commandButton value="Click" />
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/messages.png]]
+
+** h:outputFormat
+#+ATTR_REVEAL: :frag (roll-in)
+*h:outputFormat*. Muestra texto parametrizado. Utiliza la clase java.text.MessageFormat de formateo.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:outputFormat value="Welcome, {0}. You have {1} new messages.">
+    <f:param value="#{userController.user.firstName}" />
+    <f:param value="#{userController.user.messageCount}" />
+</h:outputFormat>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/outputFormat.png]]
+
+** h:outputLabel
+#+ATTR_REVEAL: :frag (roll-in)
+*h:outputLabel*. Muestra un texto fijo.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:panelGroup>
+        <h:outputLabel id="usernameLabel" for="username"
+                       value="#{messages.usernameLabel} " />
+        <h:inputText id="username" value="#{userBean.user.username}" />
+    </h:panelGroup>
+</h:form>
+#+end_src
+
+** h:outputLink
+#+ATTR_REVEAL: :frag (roll-in)
+*h:outputLink*. Crea un enlace de hipertexto.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:outputLink id="link1" value="http://www.mycompany.com">
+    <f:param name="projectId" value="123" />
+    <f:param name="userId" value="45" />
+    <h:outputText value="Open Project" />
+</h:outputLink>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/outputlink.png]]
+
+** h:outputText
+#+ATTR_REVEAL: :frag (roll-in)
+*h:outputText*
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:outputText value="#{messages.welcomeMessage}" style="font-weight:bold" />
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/outputText.png]]
+
+** h:panelGrid
+#+ATTR_REVEAL: :frag (roll-in)
+*h:panelGrid*. Crea una tabla con los componentes incluidos en el panelGrid.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:panelGrid id="panel" columns="2" border="1" cellpadding="0" cellspacing="2">
+   <f:facet name="header">
+      <h:outputText value="#{messages.signInMessage}"/>
+   </f:facet>
+   <h:outputLabel for="username" value="#{messages.usernameLabel}" />
+   <h:inputText id="username" value="#{userController.user.username}" />
+   <h:outputLabel for="password" value="#{messages.passwordLabel}" />
+   <h:inputText id="password" value="#{userController.user.password}" />
+   <f:facet name="footer">
+   <h:panelGroup style="display:block; text-align:center">
+      <h:commandButton id="submit" value="#{messages.submitLabel}" />
+   </h:panelGroup>
+   </f:facet>
+ </h:panelGrid>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/panelGrid.png]]
+
+** h:panelGroup
+#+ATTR_REVEAL: :frag (roll-in)
+*h:panelGroup*. Agrupa varios componentes para que cierto componente los trate como un único componente (por ejemplo para meter varios componentes en una celda de un panelGrid.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form id="form">
+    <h:panelGrid id="grid" columns="1">
+        <h:panelGroup>
+            <h:outputLabel value="#{messages.usernameLabel} " />
+            <h:inputText label="#{messages.usernameLabel}" id="username"
+                         value="#{userController.user.username}" required="true" />
+            <h:message for="username" errorClass="error" />
+        </h:panelGroup>
+        <h:panelGroup>
+            <h:outputLabel value="#{messages.passwordLabel} " />
+            <h:inputSecret label="#{messages.passwordLabel}" id="password"
+                         value="#{userController.user.username}" required="true" />
+            <h:message for="password" errorClass="error" />
+        </h:panelGroup>
+        <h:commandButton id="submit" value="#{messages.submitLabel}" />
+    </h:panelGrid>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/panelGroup.png]]
+
+** h:selectBooleanCheckbox
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectBooleanCheckbox*. Crea una casilla con dos estados: activado y desactivado.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:selectBooleanCheckbox id="remember" value="#{userController.user.remember}" />
+    <h:outputLabel value="#{messages.rememberMeLabel}" for="remember" />
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectBooleanCheckbox.png]]
+
+** h:selectManyCheckbox
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectManyCheckbox*. Crea un conjunto de casillas activables.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:selectManyCheckbox id="subscriptions"
+                          value="#{subscriptionController.subscriptions}"
+                          layout="pageDirection">
+        <f:selectItem id="item1" itemLabel="News" itemValue="1" />
+        <f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+        <f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+        <f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+        <f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+    </h:selectManyCheckbox>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectManyCheckbox.png]]
+
+** h:selectManyListbox
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectManyListbox*. Crea una lista que permite seleccionar múltiples elementos.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:selectManyListbox id="subscriptions"
+                         value="#{subscriptionController.subscriptions}">
+        <f:selectItem id="item1" itemLabel="News" itemValue="1" />
+        <f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+        <f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+        <f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+        <f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+    </h:selectManyListbox>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectManyListbox.png]]
+
+** h:selectManyMenu
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectManyMenu*. Crea una lista desplegable de selección múltiple.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:selectManyMenu id="subscriptions"
+                      value="#{subscriptionController.subscriptions}">
+        <f:selectItem id="item1" itemLabel="News" itemValue="1" />
+        <f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+        <f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+        <f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+        <f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+    </h:selectManyMenu>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectManyMenu.png]]
+
+** h:selectOneListbox
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectOneListbox*. Crea una lista en la que se puede seleccionar un único elemento.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+	<h:selectOneListbox id="subscriptions"
+	                    value="#{subscriptionController.subscriptions}">
+		<f:selectItem id="item1" itemLabel="News" itemValue="1" />
+		<f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+		<f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+		<f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+		<f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+	</h:selectOneListbox>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectOneListbox.png]]
+
+** h:selectOneMenu
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectOneMenu*. Crea na lista desplegable de selección.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+	<h:selectOneMenu id="subscriptions"
+	                 value="#{subscriptionController.subscriptions}">
+		<f:selectItem id="item1" itemLabel="News" itemValue="1" />
+		<f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+		<f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+		<f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+		<f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+	</h:selectOneMenu>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectOneMenu.png]]
+
+** h:selectOneRadio
+#+ATTR_REVEAL: :frag (roll-in)
+*h:selectOneRadio*. Crea una lista de botones, redondos normalmente, excluyentes.
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src html
+<h:form>
+    <h:selectOneRadio id="subscriptions"
+                      value="#{subscriptionController.subscriptions}">
+        <f:selectItem id="item1" itemLabel="News" itemValue="1" />
+        <f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+        <f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+        <f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+        <f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+    </h:selectOneRadio>
+</h:form>
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+[[file:img/selectOneRadio.png]]
