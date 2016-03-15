@@ -79,7 +79,7 @@ public class Login {
      *
      * @param contrasena La contraseña del usuario a establecer.
      */
-    public void setContrasenia(String contrasena) {
+    public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
 
