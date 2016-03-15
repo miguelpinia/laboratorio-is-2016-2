@@ -23,3 +23,8 @@ Hay que cambiar el nombre del usuario de la base de datos por el de ustedes. Est
 el archivo `hibernate.cfg.xml` en el atributo `hibernate.connection.username`.
 
 También hay que tener cuidado con el puerto y el nombre de la base de datos.
+
+## Ejemplo de la clase 6
+
+El ejemplo de los managed beans no requiere configuración adicional,
+basta con abrirla con netbeans y ejecutar el proyecto.
