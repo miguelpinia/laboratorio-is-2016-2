@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28/03/2016 08:54:23 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Login" table="login" schema="login" optimistic-lock="version">
+        <comment>El usuario USUARIO tiene una contrase&#195;&#177;a PASSWORD despu&#195;&#169;s de aplicar un hash</comment>
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="usuario" type="string">
+            <column name="usuario" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
