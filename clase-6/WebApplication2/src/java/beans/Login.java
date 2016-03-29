@@ -1,10 +1,17 @@
 package beans;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+
+import logic.LoginHelper;
 
 /**
  * Bean manejado qué se utiliza para el manejo de inicio de Sesión en
@@ -19,6 +26,7 @@ public class Login {
     private final HttpServletRequest httpServletRequest; // Obtiene información de todas las peticiones de usuario.
     private final FacesContext faceContext; // Obtiene información de la aplicación
     private FacesMessage message; // Permite el envio de mensajes entre el bean y la vista.
+    private LoginHelper helper;
 
     /**
      * Constructor para inicializar los valores de faceContext y
@@ -27,6 +35,7 @@ public class Login {
     public Login() {
         faceContext = FacesContext.getCurrentInstance();
         httpServletRequest = (HttpServletRequest) faceContext.getExternalContext().getRequest();
+        helper = new LoginHelper();
     }
 
     /**
@@ -35,16 +44,31 @@ public class Login {
      * @return El nombre de la vista que va a responder.
      */
     public String login() {
-        if (usuario.equals("FOO") && contrasena.equals("bar")) { // Las contraseñas nunca deben de ir en texto plano.
-            httpServletRequest.getSession().setAttribute("sessionUsuario", usuario);
-            message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
-            faceContext.addMessage(null, message);
-            return "acceso";
+        model.Login login = helper.getLoginPorNombre(usuario);
+        if (login != null) {
+            try {
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(contrasena.getBytes());
+                byte[] digest = md.digest();
+                StringBuilder sb = new StringBuilder();
+                for (byte b : digest) {
+                    sb.append(String.format("%02x", b & 0xff));
+                }
+                if (sb.toString().equals(login.getPassword())) {
+                    httpServletRequest.getSession().setAttribute("sessionUsuario", usuario);
+                    message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto", null);
+                    faceContext.addMessage(null, message);
+                    return "acceso";
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuario o contraseña incorrecto", null);
             faceContext.addMessage(null, message);
             return "index";
         }
+        return "index";
     }
 
     /**
