@@ -16,4 +16,8 @@
             <column name="password" not-null="true" />
         </property>
     </class>
+    <sql-query name="BuscaPorNombre">
+	<return alias="Login" class="model.Login"/>
+	<![CDATA[select * from login.login where login.usuario = :usuario]]>
+    </sql-query>
 </hibernate-mapping>
