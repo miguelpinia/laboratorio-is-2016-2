@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Tips</title>
+<meta name="author" content="(Miguel Piña)"/>
+
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/reveal.css"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/css/theme/night.css" id="theme"/>
+<link rel="stylesheet" href="file:///home/miguel/proyectos/reveal.js/presentation.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:///home/miguel/proyectos/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1>Tips</h1>
+<h2>Miguel Piña</h2>
+<h2><a href="mailto:miguel_pinia@ciencias.unam.mx">miguel_pinia@ciencias.unam.mx</a></h2>
+<h2><span class="timestamp-wrapper"><span class="timestamp">[2016-04-05 mar 11:02]</span></span></h2>
+</section>
+
+
+<section>
+<section id="slide-orgheadline9">
+<h2 id="orgheadline9">Git</h2>
+<p class="fragment (roll-in)">
+A continuación algunos tips de configuración sobre git.
+</p>
+
+</section>
+<section id="slide-orgheadline1">
+<h3 id="orgheadline1">Configuración</h3>
+<p class="fragment (roll-in)">
+Una de las cosas qué siempre hay que tener es una buena configuración de Git.
+</p>
+<p class="fragment (roll-in)">
+<i>~/</i>.gitconfig
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)"><span style="color: #A1EFE4;">[</span>user<span style="color: #A1EFE4;">]</span>
+    email = miguel_pinia@ciencias.unam.mx
+    name = Miguel Angel Pi&#241;a Avelino
+<span style="color: #A1EFE4;">[</span>push<span style="color: #A1EFE4;">]</span>
+    default = simple
+<span style="color: #A1EFE4;">[</span>merge<span style="color: #A1EFE4;">]</span>
+    tool = meld
+<span style="color: #A1EFE4;">[</span>alias<span style="color: #A1EFE4;">]</span>
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+    p = push -u origin master
+    st = status
+    co = checkout
+    ci = commit
+    br = branch
+    lg = log -p
+    ls = ls-files
+    df = diff
+    pb = log --graph --abbrev-commit --decorate --date=relative --all
+    ab = log --graph --oneline --decorate --date=relative --all
+    recent = for-each-ref --sort=committerdate refs/heads/ --format=<span style="color: #E6DB74;">'%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'</span>
+<span style="color: #A1EFE4;">[</span>core<span style="color: #A1EFE4;">]</span>
+    excludesfile = /home/miguel/.gitignore_global
+</pre>
+</div>
+
+</section>
+<section id="slide-orgheadline2">
+<h3 id="orgheadline2">Configuración</h3>
+<p class="fragment (roll-in)">
+También hay que tener un listado de los archivos que no se deben incluir al momento de hacer un commit.
+</p>
+<p class="fragment (roll-in)">
+~/.gitignore global
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">.gitignore_global
+.gitignore
+*/target/
+nbproject/private
+nb-configuration.xml
+javadoc/
+/build/
+/dist/
+session.*
+/**/*.elc
+/**/*~
+/semanticdb/
+projectile.cache
+.recentf
+ac-comphist.dat
+</pre>
+</div>
+
+</section>
+<section id="slide-orgheadline8">
+<h3 id="orgheadline8">Escribiendo buenos mensajes para un commit</h3>
+<p>
+Hay 5 buenos tips para escribir mejores mensajes para un commit.
+</p>
+
+</section>
+<section id="slide-orgheadline3">
+<h4 id="orgheadline3">Tip 1</h4>
+<p>
+La primera linea debería ser siempre de 50 caracteres o menos y debería de ser
+seguida por una linea en blanco.
+</p>
+
+</section>
+<section id="slide-orgheadline4">
+<h4 id="orgheadline4">Tip 2</h4>
+<p>
+Usar alguna herramienta para gestión de git como magit en emacs.
+</p>
+
+</section>
+<section id="slide-orgheadline5">
+<h4 id="orgheadline5">Tip 3</h4>
+<p>
+Nunca uses el flag -m / &#x2013;message.
+</p>
+<p class="fragment (roll-in)">
+Esto da un mensaje muy pobre y que no permite entender qué es lo que sucedió en ese commit. Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">git commit -m <span style="color: #E6DB74;">"Fix login bug"</span>
+</pre>
+</div>
+<p class="fragment (roll-in)">
+Es un mensaje que no dice que fue lo que pasó realmente al realizar ese commit. Por lo que un mejor mensaje podría ser:
+</p>
+<div class="org-src-container">
+
+<pre  class="fragment (roll-in)">Redirecciona al usuario a la p&#225;gina solicitada.
+
+https://trello.com/path/to/relevant/card
+
+Los usuarios estaban siendo redireccionados al home de la p&#225;gina, lo
+cu&#225;l no es util cuando alg&#250;n usuario necesita acceder directamente a la
+p&#225;gina cuya petici&#243;n hizo originalmente. Los cambios que se hicieron
+para resolver este problema son:
+
+- Almacenar el path solicitado en una variable de la sesi&#243;n.
+- Redirigir a ese path una vez que se realiz&#243; el inicio de sesi&#243;n de
+  manera exitosa.
+</pre>
+</div>
+
+</section>
+<section id="slide-orgheadline6">
+<h4 id="orgheadline6">Tip 4</h4>
+<p>
+Responde las siguientes preguntas cuando escribas un commit
+</p>
+<ul>
+<li class="fragment roll-in">¿Por qué es necesario este cambio?</li>
+<li class="fragment roll-in">¿Como resuelve el problema?</li>
+<li class="fragment roll-in">¿Qué efectos laterales va a tener este cambio?</li>
+
+</ul>
+
+</section>
+<section id="slide-orgheadline7">
+<h4 id="orgheadline7">Tip 5</h4>
+<p>
+Considera incluir enlaces al problema/historia/ticket en el mensaje del commit,
+de tal forma que sea fácil el acceder a la información qué permitió el hacer el
+cambio en ese commit.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline10">
+<h2 id="orgheadline10">Bases de datos</h2>
+<ul>
+<li class="fragment roll-in"><b>Buen diseño</b> "Comenzar por lo que se desea obtener como resultado final"</li>
+<li class="fragment roll-in"><b>Normalización</b> "Aplicar al menos la tercera forma normal hasta donde sea posible"</li>
+<li class="fragment roll-in"><b>Nomenclatura estándar</b> "Usa nombres faciles de entender y mantenlos durante todo el diseño"</li>
+<li class="fragment roll-in"><b>Documentar</b> "Documenta todo lo que sea posible"</li>
+<li class="fragment roll-in"><b>Claves primarias</b> “Crear llaves primarias adecuadas”</li>
+<li class="fragment roll-in"><b>Integridad de la base de datos</b> “Utilizar las herramientas disponibles para asegurar la integridad”</li>
+<li class="fragment roll-in"><b>Procedimientos almacenados</b> “Usar procedimientos almacenados y vistas para la obtención de datos”</li>
+<li class="fragment roll-in"><b>Pruebas de estrés</b> “Realizar pruebas de estrés para no encontrar sorpresas en el futuro”</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline11">
+<h2 id="orgheadline11">Diseño web</h2>
+<ul>
+<li class="fragment roll-in">Manténlo limpio y fácil de usar</li>
+<li class="fragment roll-in">Haz un poco de reconocimiento de terreno</li>
+<li class="fragment roll-in">Utiliza la jerarquía visual</li>
+<li class="fragment roll-in">Haz que tu texto sea fácil de leer</li>
+<li class="fragment roll-in"><a href="http://programmers.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before">Todo lo que un programador web debería conocer</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgheadline12">
+<h2 id="orgheadline12">Programación en equipo</h2>
+<ul>
+<li class="fragment roll-in">Usar las mismas versiones del software con el que desarrollan</li>
+<li class="fragment roll-in">Comunicación constante</li>
+<li class="fragment roll-in">Usar git o alguna otra herramienta de control de versiones</li>
+<li class="fragment roll-in">Usar el mismo estilo para programar (Ejemplo estilo de codificación en Java)</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+
+<script src="file:///home/miguel/proyectos/reveal.js/lib/js/head.min.js"></script>
+<script src="file:///home/miguel/proyectos/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: true,
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'slide', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'slow',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:///home/miguel/proyectos/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:///home/miguel/proyectos/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+]
+});
+</script>
+</body>
+</html>

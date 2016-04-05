@@ -1,0 +1,155 @@
+#+REVEAL_ROOT: file:///home/miguel/proyectos/reveal.js
+#+title: Tips
+#+author: Miguel Piña
+#+date: [2016-04-05 mar 11:02]
+#+setupfile: ~/proyectos/org-html-themes/setup/theme-bigblow.setup
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_single_file:ni
+#+OPTIONS: toc:nil
+
+#+REVEAL_THEME: night
+#+REVEAL_EXTRA_CSS: file:///home/miguel/proyectos/reveal.js/presentation.css
+#+REVEAL_TRANS: slide
+#+REVEAL_SPEED: slow
+
+
+* Git
+#+ATTR_REVEAL: :frag (roll-in)
+A continuación algunos tips de configuración sobre git.
+
+** Configuración
+#+ATTR_REVEAL: :frag (roll-in)
+Una de las cosas qué siempre hay que tener es una buena configuración de Git.
+#+ATTR_REVEAL: :frag (roll-in)
+/~//.gitconfig
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src bash
+[user]
+	email = miguel_pinia@ciencias.unam.mx
+	name = Miguel Angel Piña Avelino
+[push]
+	default = simple
+[merge]
+	tool = meld
+[alias]
+    tree = log --graph --decorate --pretty=oneline --abbrev-commit
+    p = push -u origin master
+    st = status
+    co = checkout
+    ci = commit
+    br = branch
+    lg = log -p
+    ls = ls-files
+    df = diff
+    pb = log --graph --abbrev-commit --decorate --date=relative --all
+    ab = log --graph --oneline --decorate --date=relative --all
+[core]
+	excludesfile = /home/miguel/.gitignore_global
+#+end_src
+
+** Configuración
+#+ATTR_REVEAL: :frag (roll-in)
+También hay que tener un listado de los archivos que no se deben incluir al momento de hacer un commit.
+#+ATTR_REVEAL: :frag (roll-in)
+~/.gitignore global
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src bash
+.gitignore_global
+.gitignore
+*/target/
+nbproject/private
+nb-configuration.xml
+javadoc/
+/build/
+/dist/
+session.*
+/**/*.elc
+/**/*~
+/semanticdb/
+projectile.cache
+.recentf
+ac-comphist.dat
+#+end_src
+
+** Escribiendo buenos mensajes para un commit
+
+Hay 5 buenos tips para escribir mejores mensajes para un commit.
+
+*** Tip 1
+
+La primera linea debería ser siempre de 50 caracteres o menos y debería de ser
+seguida por una linea en blanco.
+
+*** Tip 2
+
+Usar alguna herramienta para gestión de git como magit en emacs.
+
+*** Tip 3
+
+Nunca uses el flag -m / --message.
+#+ATTR_REVEAL: :frag (roll-in)
+Esto da un mensaje muy pobre y que no permite entender qué es lo que sucedió en ese commit. Ejemplo:
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src bash
+git commit -m "Fix login bug"
+#+end_src
+#+ATTR_REVEAL: :frag (roll-in)
+Es un mensaje que no dice que fue lo que pasó realmente al realizar ese commit. Por lo que un mejor mensaje podría ser:
+#+ATTR_REVEAL: :frag (roll-in)
+#+begin_src bash
+Redirecciona al usuario a la página solicitada.
+
+https://trello.com/path/to/relevant/card
+
+Los usuarios estaban siendo redireccionados al home de la página, lo
+cuál no es util cuando algún usuario necesita acceder directamente a la
+página cuya petición hizo originalmente. Los cambios que se hicieron
+para resolver este problema son:
+
+- Almacenar el path solicitado en una variable de la sesión.
+- Redirigir a ese path una vez que se realizó el inicio de sesión de
+  manera exitosa.
+#+end_src
+
+*** Tip 4
+
+Responde las siguientes preguntas cuando escribas un commit
+#+ATTR_REVEAL: :frag (roll-in)
+- ¿Por qué es necesario este cambio?
+- ¿Como resuelve el problema?
+- ¿Qué efectos laterales va a tener este cambio?
+
+*** Tip 5
+
+Considera incluir enlaces al problema/historia/ticket en el mensaje del commit,
+de tal forma que sea fácil el acceder a la información qué permitió el hacer el
+cambio en ese commit.
+
+* Bases de datos
+#+ATTR_REVEAL: :frag (roll-in)
+- *Buen diseño* "Comenzar por lo que se desea obtener como resultado final"
+- *Normalización* "Aplicar al menos la tercera forma normal hasta donde sea posible"
+- *Nomenclatura estándar* "Usa nombres faciles de entender y mantenlos durante todo el diseño"
+- *Documentar* "Documenta todo lo que sea posible"
+- *Claves primarias* “Crear llaves primarias adecuadas”
+- *Integridad de la base de datos* “Utilizar las herramientas disponibles para asegurar la integridad”
+- *Procedimientos almacenados* “Usar procedimientos almacenados y vistas para la obtención de datos”
+- *Pruebas de estrés* “Realizar pruebas de estrés para no encontrar sorpresas en el futuro”
+
+* Diseño web
+#+ATTR_REVEAL: :frag (roll-in)
+- Manténlo limpio y fácil de usar
+- Haz un poco de reconocimiento de terreno
+- Utiliza la jerarquía visual
+- Haz que tu texto sea fácil de leer
+- [[http://programmers.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before][Todo lo que un programador web debería conocer]]
+
+* Programación en equipo
+#+ATTR_REVEAL: :frag (roll-in)
+- Usar las mismas versiones del software con el que desarrollan
+- Comunicación constante
+- Usar git o alguna otra herramienta de control de versiones
+- Usar el mismo estilo para programar (Ejemplo estilo de codificación en Java)
