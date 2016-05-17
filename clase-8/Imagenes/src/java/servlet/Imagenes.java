@@ -30,12 +30,9 @@ public class Imagenes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String uri = request.getRequestURI();
-        System.out.println(uri);
         uri = uri.replace(request.getContextPath() + "/", "");
         uri = uri.replace("%20", " ");
-        System.out.println(uri);
         uri = uri.substring(uri.indexOf("/") + 1);
-        System.out.println("Uri: " + uri);
         ImageHelper helper = new ImageHelper();
         Imagen img = helper.getImagenPorNombre(uri);
         response.setContentType(img.getMimeType().getNombre());
