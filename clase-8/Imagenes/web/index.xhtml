@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+  <h:head>
+    <title>Facelet Title</title>
+  </h:head>
+  <h:body>
+
+    <c:choose>
+      <c:when test="#{not empty bean.nombreArchivo}">
+        <h1>Imagen subida!</h1>
+      </c:when>
+      <c:otherwise>
+        <h1>Ejemplo de imagenes subidas</h1>
+      </c:otherwise>
+    </c:choose>
+
+    <h:form id="form" enctype="multipart/form-data">
+
+      <h:messages/>
+      <h:panelGrid columns="2">
+        <h:outputText value="Archivo a subir: "/>
+        <h:inputFile id="file" value="#{bean.file}"
+                     validator="#{bean.validateFile}"/>
+      </h:panelGrid> <br/>
+
+      <h:commandButton value="Upload File" action="#{bean.upload()}"/>
+      <h:commandButton value="Upload File (Ajax)" action="#{bean.upload()}">
+        <f:ajax execute="file" render="@all"/>
+      </h:commandButton>
+    </h:form>
+
+    <c:if test="#{not empty bean.nombreArchivo}">
+      <h:panelGrid columns="1">
+        <h:outputText value="Imagen Subida: #{bean.nombreArchivo}"/>
+        <h:graphicImage value="imagenes/#{bean.nombreArchivo}"/>
+      </h:panelGrid>
+    </c:if>
+
+
+  </h:body>
+</html>
+
