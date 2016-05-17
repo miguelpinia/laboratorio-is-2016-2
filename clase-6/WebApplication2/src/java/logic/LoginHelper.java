@@ -35,4 +35,10 @@ public class LoginHelper {
         return null;
     }
 
+    public void guardaContacto(Login l) {
+        session.beginTransaction();
+        session.persist(l);
+        session.getTransaction().commit();
+    }
+
 }
