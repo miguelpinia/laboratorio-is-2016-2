@@ -1,0 +1,20 @@
+Login.xhtml
+
+<h:form>
+    <h:panelGrid columns="2">
+        <h:outputText value="Username" />
+        <h:inputText value="#{userForm.username}" />
+
+        <h:outputText value="Password" />
+        <h:inputSecret value="#{userForm.password}" />
+
+        <h:panelGroup />
+        <h:commandButton value="login" action="#{userForm.login}" />
+    </h:panelGrid>
+</h:form>
+
+Logout.xhtml
+
+<h:form>
+  <h:commandButton value="logout" action="#{userForm.logout}" />
+</h:form>

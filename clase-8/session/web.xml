@@ -1,0 +1,11 @@
+<!-- Configuración del filtro en web.xml -->
+<!-- http://balusc.omnifaces.org/2007/03/user-session-filter.html#top -->
+
+<filter>
+    <filter-name>userSessionFilter</filter-name>
+    <filter-class>mycontroller.UserSessionFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>userSessionFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
